@@ -1,20 +1,8 @@
-import { Layout, Menu, MenuProps } from "antd";
+import { Layout, Menu } from "antd";
+import { Outlet } from "react-router-dom";
+import { adminSideBarItems } from "../../routes/admin.routes";
 
 const { Header, Content, Footer, Sider } = Layout;
-
-const items: MenuProps["items"] = [
-  { key: "1", label: "Dashboard" },
-  { key: "2", label: "Profile" },
-  {
-    key: "3",
-    label: "User Managment",
-    children: [
-      { key: "c1", label: "nested 1" },
-      { key: "c2", label: "nested 2" },
-      { key: "c3", label: "nested 3" },
-    ],
-  },
-];
 
 const MainLayout = () => {
   return (
@@ -39,19 +27,13 @@ const MainLayout = () => {
               backgroundColor: "red",
             }}
           >
-            <h2
-              style={{
-                color: "white",
-              }}
-            >
-              PH-Uni
-            </h2>
+            <h2 style={{ color: "white" }}>PH-Uni</h2>
           </div>
           <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={["4"]}
-            items={items}
+            items={adminSideBarItems}
           />
         </Sider>
         <Layout>
@@ -65,7 +47,7 @@ const MainLayout = () => {
                 // borderRadius: borderRadiusLG,
               }}
             >
-              <h2>main content should here</h2>
+              <Outlet></Outlet>
             </div>
           </Content>
           <Footer style={{ textAlign: "center" }}>

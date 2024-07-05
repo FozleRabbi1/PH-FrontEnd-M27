@@ -1,26 +1,46 @@
 import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/fetures/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
-import { setUser } from "../redux/fetures/auth/authSlice";
+import { setUser, TUser } from "../redux/fetures/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { register, handleSubmit } = useForm({
     defaultValues: { id: "A-0001", password: "admin123" },
   });
   const [login, { isError }] = useLoginMutation();
 
-  const onSubmit = async (data) => {
-    const res = await login(data).unwrap();
-    const token = res.data.accessToken;
-    const user = verifyToken(token);
-    // const user = {
-    //   userId: userData.userId,
-    //   role: userData.role,
-    // };
-    dispatch(setUser({ user, token }));
+  if (isError) {
+    return <p>Error</p>;
+  }
+
+  const onSubmit = async (data : FieldValues) => {
+    const tostId = toast.loading("Logging in");
+    try {
+      const res = await login(data).unwrap();
+      const token = res.data.accessToken;
+      const user = verifyToken(token) as TUser;
+      dispatch(setUser({ user, token }));
+      toast.success(`${user.role} Login SuccessFully`, {
+        id: tostId, //এর ফলে loding toast কে সে folsy করে ফেলবে & উক্ত toast এর মধ্যে success value show করবে
+        duration: 3000,
+        style: {
+          background: "green",
+          color: "white",
+          width: "250px",
+        },
+      });
+
+      navigate(`/${user.role}/dashboard`);
+    } catch (err) {
+      toast.error("Somthing went wrong", { id: tostId, duration: 3000 });
+      //এর ফলে loding toast কে সে folsy করে ফেলবে & উক্ত toast এর মধ্যে error value show করবে
+    }
   };
 
   return (

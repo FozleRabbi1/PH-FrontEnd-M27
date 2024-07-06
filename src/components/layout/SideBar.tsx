@@ -16,7 +16,6 @@ const userRole = {
 
 const SideBar = () => {
   const user = useAppSelector(selectCurrentUser);
-  console.log(user);
 
   // const role = "admin";
   let sideBarItems;

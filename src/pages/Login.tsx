@@ -12,11 +12,7 @@ const Login = () => {
   const dispatch = useAppDispatch();
   // const { register, handleSubmit } = useForm({ defaultValues: { id: "A-0001", password: "admin123" }});
   const { register, handleSubmit } = useForm({});
-  const [login, { isError }] = useLoginMutation();
-
-  if (isError) {
-    return <p>Error</p>;
-  }
+  const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
     const tostId = toast.loading("Logging in");
@@ -37,6 +33,7 @@ const Login = () => {
 
       navigate(`/${user.role}/dashboard`);
     } catch (err) {
+      console.log(err);
       toast.error("Somthing went wrong", { id: tostId, duration: 3000 });
       //এর ফলে loding toast কে সে folsy করে ফেলবে & উক্ত toast এর মধ্যে error value show করবে
     }

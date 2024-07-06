@@ -7,8 +7,8 @@ const AcademinSemester = () => {
   return (
     <div>
       <h2>this is academic semester managment</h2>
-      {data?.data?.map((item) => (
-        <p>{item.name}</p>
+      {data?.data?.map((item, i) => (
+        <p key={i}>{item.name}</p>
       ))}
     </div>
   );

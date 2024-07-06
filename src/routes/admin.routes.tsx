@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import AcademinSemester from "../pages/admin/AcademinSemesterManagment/AcademinSemester";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
@@ -10,6 +11,16 @@ export const adminPaths = [
     name: "Dashboard",
     path: "dashboard",
     element: <Dashboard />,
+  },
+  {
+    name: "Academic Managment",
+    children: [
+      {
+        name: "Academin Semester",
+        path: "academic-semester",
+        element: <AcademinSemester />,
+      },
+    ],
   },
   {
     name: "User Managment",

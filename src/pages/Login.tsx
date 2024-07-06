@@ -10,16 +10,15 @@ import { toast } from "sonner";
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm({
-    defaultValues: { id: "A-0001", password: "admin123" },
-  });
+  // const { register, handleSubmit } = useForm({ defaultValues: { id: "A-0001", password: "admin123" }});
+  const { register, handleSubmit } = useForm({});
   const [login, { isError }] = useLoginMutation();
 
   if (isError) {
     return <p>Error</p>;
   }
 
-  const onSubmit = async (data : FieldValues) => {
+  const onSubmit = async (data: FieldValues) => {
     const tostId = toast.loading("Logging in");
     try {
       const res = await login(data).unwrap();

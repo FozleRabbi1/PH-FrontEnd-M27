@@ -1,5 +1,5 @@
 import { Button, Row } from "antd";
-import { FieldValues, useForm, useFormContext } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/fetures/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
@@ -16,6 +16,11 @@ const Login = () => {
   // const { register, handleSubmit } = useForm({});
   // const { register } = useFormContext();
   const [login] = authApi.useLoginMutation();
+
+  const defaultValue = {
+    id: "A-0001",
+    password: "admin123",
+  };
 
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
@@ -44,7 +49,7 @@ const Login = () => {
 
   return (
     <Row justify="center" align="middle" style={{ height: "100vh" }}>
-      <PHForm onSubmit={onSubmit}>
+      <PHForm onSubmit={onSubmit} defaultValues={defaultValue}>
         <PHInput type="text" name="id" label="ID"></PHInput>
         <PHInput type="text" name="password" label="Password"></PHInput>
         <Button htmlType="submit">Login</Button>

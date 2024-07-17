@@ -7,6 +7,12 @@ export const academicManagmentApi = baseApi.injectEndpoints({
         url: "/academic-semister",
         method: "GET",
       }),
+      transformResponse: (response) => {
+        return {
+          data: response.data,
+          //   meta: response.meta, // meta backend থেকে পাঠানো হয়নি
+        };
+      },
     }),
     addAcademicSemester: builder.mutation({
       query: (data) => ({

@@ -24,7 +24,7 @@ export const adminRoutes2 = [
             },
         ],
     },
-];
+] 
 
 const newArray = adminRoutes2.reduce((acc, item) => {
     if (item.name && item.path) {

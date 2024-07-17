@@ -15,7 +15,7 @@ const PHInput = ({ type, name, label }: TInputProps) => {
         name={name} //{...register(name)} এটি উঠে যাবে কারন <Controller  name={name} এর সাহায্যে register করে ফেলছে ( v:2.18 )
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} id={name} />
+            <Input {...field} type={type} id={name} size="large" />
           </Form.Item>
         )}
       />

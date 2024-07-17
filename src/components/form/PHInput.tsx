@@ -1,4 +1,4 @@
-import { Input } from "antd";
+import { Form, Input } from "antd";
 import { Controller } from "react-hook-form";
 
 type TInputProps = {
@@ -9,11 +9,15 @@ type TInputProps = {
 
 const PHInput = ({ type, name, label }: TInputProps) => {
   return (
-    <div style={{ marginBottom: "5px" }}>
-      {label ? label : null}
+    <div>
+      {/* {label ? label : null}   <Form.Item এর মধ্যে label={label} use করার জন্য এখানে আর label লাগবে না  */}
       <Controller
         name={name} //{...register(name)} এটি উঠে যাবে কারন <Controller  name={name} এর সাহায্যে register করে ফেলছে ( v:2.18 )
-        render={({ field }) => <Input {...field} type={type} id={name} />}
+        render={({ field }) => (
+          <Form.Item label={label}>
+            <Input {...field} type={type} id={name} />
+          </Form.Item>
+        )}
       />
     </div>
   );

@@ -1,6 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import AcademicDepartment from "../pages/admin/AcademicDepartmentManagment/AcademicDepartment";
+import CreateAcademicDepartment from "../pages/admin/AcademicDepartmentManagment/CreateAcademicDepartment";
+import AcademicFaculty from "../pages/admin/AcademicFacultyManagment/AcademicFaculty";
+import CreateAcademicFaculty from "../pages/admin/AcademicFacultyManagment/CreateAcademicFaculty";
 import AcademinSemester from "../pages/admin/AcademinSemesterManagment/AcademinSemester";
+import CreateAcademinSemester from "../pages/admin/AcademinSemesterManagment/CreateAcademinSemester";
 import CreateAdmin from "../pages/admin/CreateAdmin";
 import CreateFaculty from "../pages/admin/CreateFaculty";
 import CreateStudent from "../pages/admin/CreateStudent";
@@ -16,9 +21,36 @@ export const adminPaths = [
     name: "Academic Managment",
     children: [
       {
+        name: "Create A. Semester",
+        path: "create-academic-semester",
+        element: <CreateAcademinSemester />,
+      },
+      {
         name: "Academin Semester",
         path: "academic-semester",
         element: <AcademinSemester />,
+      },
+
+      {
+        name: "Create A. Faculty",
+        path: "create-academic-faculty",
+        element: <CreateAcademicFaculty />,
+      },
+      {
+        name: "Academin Faculty",
+        path: "academic-faculty",
+        element: <AcademicFaculty />,
+      },
+
+      {
+        name: "Create A. Department",
+        path: "create-academic-department",
+        element: <CreateAcademicDepartment />,
+      },
+      {
+        name: "Academin Department",
+        path: "academic-department",
+        element: <AcademicDepartment />,
       },
     ],
   },

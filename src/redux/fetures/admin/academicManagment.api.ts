@@ -1,3 +1,5 @@
+import { TResponseRedux } from "../../../types";
+import { TAcedemicSemester } from "../../../types/academicManagment.types";
 import { baseApi } from "../../api/baseApi";
 
 export const academicManagmentApi = baseApi.injectEndpoints({
@@ -7,7 +9,7 @@ export const academicManagmentApi = baseApi.injectEndpoints({
         url: "/academic-semister",
         method: "GET",
       }),
-      transformResponse: (response) => {
+      transformResponse: (response: TResponseRedux<TAcedemicSemester[]>) => {
         return {
           data: response.data,
           //   meta: response.meta, // meta backend থেকে পাঠানো হয়নি

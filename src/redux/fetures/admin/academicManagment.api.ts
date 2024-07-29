@@ -1,4 +1,4 @@
-import { TResponseRedux } from "../../../types";
+import { TQueryParam, TResponseRedux } from "../../../types";
 import { TAcedemicSemester } from "../../../types/academicManagment.types";
 import { baseApi } from "../../api/baseApi";
 
@@ -8,8 +8,8 @@ export const academicManagmentApi = baseApi.injectEndpoints({
       query: (query) => {
         const params = new URLSearchParams();
         if (query) {
-          query.forEach((item) => {
-            params.append(item?.name, item?.value);
+          query.forEach((item: TQueryParam) => {
+            params.append(item?.name, item?.value as string); //note: P.apperd এর মধ্যে string e দিতে হবে
           });
         }
         return {

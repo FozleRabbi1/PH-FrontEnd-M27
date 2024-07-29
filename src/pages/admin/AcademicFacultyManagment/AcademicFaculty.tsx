@@ -24,7 +24,7 @@ const AcademicFaculty = () => {
 
   const columns: TableColumnsType<TTableData> = [
     {
-      title: "Name",
+      title: "Name Of Faculty",
       dataIndex: "name",
       showSorterTooltip: { target: "full-header" },
     },

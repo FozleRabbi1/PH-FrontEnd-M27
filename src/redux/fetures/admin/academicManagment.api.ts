@@ -5,14 +5,23 @@ import { baseApi } from "../../api/baseApi";
 export const academicManagmentApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllSemester: builder.query({
-      query: () => ({
-        url: "/academic-semister",
-        method: "GET",
-      }),
+      query: (query) => {
+        const params = new URLSearchParams();
+        if (query) {
+          query.forEach((item) => {
+            params.append(item?.name, item?.value);
+          });
+        }
+        return {
+          url: "/academic-semister",
+          method: "GET",
+          params,
+        };
+      },
       transformResponse: (response: TResponseRedux<TAcedemicSemester[]>) => {
         return {
           data: response.data,
-          //   meta: response.meta, // meta backend থেকে পাঠানো হয়নি
+          meta: response.meta,
         };
       },
     }),

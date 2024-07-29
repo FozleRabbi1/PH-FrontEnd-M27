@@ -19,7 +19,7 @@ export type TMeta = {
 export type TResponse<T> = {
   data?: T; // আপাতত any type দেয়া আছে পরে change করে দিতে হবে
   error?: TError;
-  // meta?: TMeta;
+  meta?: TMeta;
   success: boolean;
   message: string;
 };

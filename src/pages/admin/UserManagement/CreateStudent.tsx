@@ -39,9 +39,9 @@ const studentDefaucltValue = {
     contactNo: "+1234567893",
     address: "789 Maple St, Springfield, IL",
   },
-  profileImg: "",
-  admissionSemester: "665887afdc3ec6a254a29b6c",
-  academicDepartment: "665d7e67e99ae88a986cf356",
+  // profileImg: "",
+  // admissionSemester: "665887afdc3ec6a254a29b6c",
+  // academicDepartment: "665d7e67e99ae88a986cf356",
 };
 
 type TItem = {
@@ -51,10 +51,7 @@ type TItem = {
 };
 
 const CreateStudent = () => {
-  const [addStudent, { data, error }] =
-    userManagementApi.useAddStudentMutation();
-
-  console.log({ data, error });
+  const [addStudent] = userManagementApi.useAddStudentMutation();
 
   const { data: semesterData, isLoading: sIsLoading } =
     academicManagmentApi.useGetAllSemesterQuery(undefined);
@@ -87,6 +84,7 @@ const CreateStudent = () => {
     <Row>
       <Col span={24}>
         <PHForm onSubmit={onSubmit} defaultValues={studentDefaucltValue}>
+          {/* ================================== Persaonal Divider ===================================== */}
           <Divider>Persaonal Info.</Divider>
           <Row gutter={8}>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>

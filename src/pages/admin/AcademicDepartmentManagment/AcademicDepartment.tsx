@@ -19,7 +19,6 @@ type TTableData = {
 const AcademicDepartment = () => {
   const { data, isLoading } =
     academicDepartManagementApi.useGetAllAcademicDepartmentManagementQuery({});
-  console.log(data?.data);
 
   const tableData = data?.data?.map(
     ({ _id, name, academicFaculty }: TApiData) => ({

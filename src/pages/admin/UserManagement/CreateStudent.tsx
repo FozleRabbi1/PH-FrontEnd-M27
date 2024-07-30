@@ -8,13 +8,14 @@ import PHDatePicker from "../../../components/form/PHDatePicker";
 import { academicManagmentApi } from "../../../redux/fetures/admin/academicManagment.api";
 import { academicDepartManagementApi } from "../../../redux/fetures/admin/academicDepartmentManagement.api";
 import { userManagementApi } from "../../../redux/fetures/admin/UserManagement/userManagement.api";
+import { toast } from "sonner";
 
 // should be remove
 const studentDefaucltValue = {
   name: {
-    firstName: "shuvo",
-    middleName: "hosain",
-    lastName: "shanto ",
+    firstName: "Fozle",
+    middleName: "rabbi",
+    lastName: "shuvo",
   },
   gender: "male",
   bloodGroup: "O+",
@@ -40,8 +41,8 @@ const studentDefaucltValue = {
     address: "789 Maple St, Springfield, IL",
   },
   // profileImg: "",
-  // admissionSemester: "665887afdc3ec6a254a29b6c",
-  // academicDepartment: "665d7e67e99ae88a986cf356",
+  admissionSemester: "665887afdc3ec6a254a29b6c",
+  academicDepartment: "66649c61c8780d533a6f3a29",
 };
 
 type TItem = {
@@ -51,7 +52,8 @@ type TItem = {
 };
 
 const CreateStudent = () => {
-  const [addStudent] = userManagementApi.useAddStudentMutation();
+  const [addStudent, { isSuccess, isError }] =
+    userManagementApi.useAddStudentMutation();
 
   const { data: semesterData, isLoading: sIsLoading } =
     academicManagmentApi.useGetAllSemesterQuery(undefined);
@@ -79,6 +81,19 @@ const CreateStudent = () => {
     formData.append("file", data.image);
     addStudent(formData);
   };
+
+  console.log({ isSuccess, isError });
+
+  if (isSuccess) {
+    toast.success(`Student Create SuccessFully`, {
+      duration: 3000,
+      style: {
+        background: "green",
+        color: "white",
+        width: "250px",
+      },
+    });
+  }
 
   return (
     <Row>

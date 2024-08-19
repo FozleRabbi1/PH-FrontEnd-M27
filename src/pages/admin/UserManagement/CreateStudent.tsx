@@ -7,8 +7,8 @@ import { bloodGroupsOptions, gendersOptions } from "../../../constants/global";
 import PHDatePicker from "../../../components/form/PHDatePicker";
 import { academicManagmentApi } from "../../../redux/fetures/admin/academicManagment.api";
 import { academicDepartManagementApi } from "../../../redux/fetures/admin/academicDepartmentManagement.api";
-import { userManagementApi } from "../../../redux/fetures/admin/UserManagement/userManagement.api";
 import { toast } from "sonner";
+import { userManagementApi } from "../../../redux/fetures/admin/UserManagement/userManagementApi";
 
 // should be remove
 const studentDefaucltValue = {

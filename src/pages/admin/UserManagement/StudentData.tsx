@@ -6,10 +6,10 @@ import {
   TableColumnsType,
   TableProps,
 } from "antd";
-import { userManagementApi } from "../../../redux/fetures/admin/UserManagement/userManagement.api";
 import { TQueryParam, TStudent } from "../../../types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { userManagementApi } from "../../../redux/fetures/admin/UserManagement/userManagementApi";
 
 export type TTableData = Pick<
   TStudent,
@@ -18,7 +18,7 @@ export type TTableData = Pick<
 
 const StudentData = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
-  const [limit, setLimit] = useState(3);
+  // const [limit, setLimit] = useState(3);
   const [page, setPage] = useState(1);
 
   const {
@@ -33,7 +33,7 @@ const StudentData = () => {
   ]);
 
   const metaData = studentData?.meta;
-  const tableData = studentData?.data.map(
+  const tableData = studentData?.data?.map(
     ({ _id, fullName, id, profileImg, email }: TTableData) => ({
       key: _id,
       fullName,

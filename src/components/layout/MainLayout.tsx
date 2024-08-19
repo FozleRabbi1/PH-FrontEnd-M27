@@ -7,10 +7,12 @@ import { logOut } from "../../redux/fetures/auth/authSlice";
 const { Header, Content } = Layout;
 
 const MainLayout = () => {
+  
   const dispatch = useAppDispatch();
   const handleLOgout = () => {
     dispatch(logOut());
   };
+
   return (
     <div>
       <Layout style={{ height: "100%" }}>

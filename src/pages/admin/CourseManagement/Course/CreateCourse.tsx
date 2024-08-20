@@ -6,14 +6,12 @@ import PHInput from "../../../../components/form/PHInput";
 import { toast } from "sonner";
 import { courseManegemnetApi } from "../../../../redux/fetures/admin/courseManagement/courseManagementApi";
 import PHSelect from "../../../../components/form/PHSelect";
+import { TResponse } from "../../../../types";
 
 const CreateCourse = () => {
   const { data: coursesData } =
     courseManegemnetApi.useGetAllCoursesQuery(undefined);
-  const { data: academicSemester } =
-    academicManagmentApi.useGetAllSemesterQuery([
-      { name: "sort", value: "year" },
-    ]);
+  const [addCourse] = courseManegemnetApi.useAddCourseMutation();
 
   const preRequisiteCoursesOptions = coursesData?.data?.map((item) => ({
     value: item._id,
@@ -25,32 +23,32 @@ const CreateCourse = () => {
     const courseData = {
       ...data,
       isDeleted: false,
-      preRequisiteCourses: data.preRequisiteCourses.map((item) => ({
+      code: Number(data.code),
+      credits: Number(data.credits),
+      preRequisiteCourses: data?.preRequisiteCourses?.map((item) => ({
         course: item,
         isDeleted: false,
       })),
     };
 
-    console.log(courseData);
+    try {
+      const res = (await addCourse(courseData)) as TResponse<any>;
+      console.log(res);
 
-    // try {
-    //   const res = (await addRegisteredSemester(semesterData)) as TResponse<any>;
-    //   console.log(res);
-
-    //   if (res?.error) {
-    //     toast.error(res?.error?.data?.message, { id: toastId });
-    //   } else {
-    //     toast.success(res?.data?.message, {
-    //       id: toastId,
-    //       style: {
-    //         background: "green",
-    //         color: "white",
-    //       },
-    //     });
-    //   }
-    // } catch (err) {
-    //   toast.error("somthing went wrong", { id: toastId });
-    // }
+      if (res?.error) {
+        toast.error(res?.error?.data?.message, { id: toastId });
+      } else {
+        toast.success(res?.data?.message, {
+          id: toastId,
+          style: {
+            background: "green",
+            color: "white",
+          },
+        });
+      }
+    } catch (err) {
+      toast.error("somthing went wrong", { id: toastId });
+    }
   };
 
   return (

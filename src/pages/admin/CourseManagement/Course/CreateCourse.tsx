@@ -1,7 +1,6 @@
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../../components/form/PHForm";
-import { academicManagmentApi } from "../../../../redux/fetures/admin/academicManagment.api";
 import PHInput from "../../../../components/form/PHInput";
 import { toast } from "sonner";
 import { courseManegemnetApi } from "../../../../redux/fetures/admin/courseManagement/courseManagementApi";

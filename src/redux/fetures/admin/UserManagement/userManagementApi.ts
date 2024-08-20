@@ -33,5 +33,26 @@ export const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAllFacultyData: builder.query({
+      query: (query) => {
+        const params = new URLSearchParams();
+        if (query) {
+          query.forEach((item: TQueryParam) => {
+            params.append(item?.name, item?.value as string); //note: P.apperd এর মধ্যে string e দিতে হবে
+          });
+        }
+        return {
+          url: "/faculties",
+          method: "GET",
+          params,
+        };
+      },
+      transformResponse: (response: TResponseRedux<TStudent[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
   }),
 });

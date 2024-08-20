@@ -2,6 +2,7 @@ import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
 import { courseManegemnetApi } from "../../../../redux/fetures/admin/courseManagement/courseManagementApi";
 import moment from "moment";
 import { TSemester } from "../../../../types";
+import { useState } from "react";
 
 export type TTableData = Pick<
   TSemester,
@@ -24,7 +25,9 @@ const items = [
 ];
 
 const RegistardSemester = () => {
-  // const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
+  const [semesterId, setSemesterId] = useState("");
+  const [updateRegisteredSemester] =
+    courseManegemnetApi.useUpdateRegisteredSemesterMutation();
   const {
     data: semesterData,
     isFetching,
@@ -42,13 +45,19 @@ const RegistardSemester = () => {
     })
   );
 
-  const handleStatusDropDown = (data) => {
-    console.log(data);
+  const handleStatusUpdate = (data) => {
+    const updateData = {
+      id: semesterId,
+      data: {
+        status: data.key,
+      },
+    };
+    updateRegisteredSemester(updateData);
   };
 
   const menuProps = {
     items,
-    onClick: handleStatusDropDown,
+    onClick: handleStatusUpdate,
   };
 
   const columns: TableColumnsType<TTableData> = [
@@ -86,10 +95,10 @@ const RegistardSemester = () => {
     {
       title: "Action",
       key: "X",
-      render: () => {
+      render: (item) => {
         return (
-          <Dropdown menu={menuProps}>
-            <Button> update </Button>
+          <Dropdown menu={menuProps} trigger={["click"]}>
+            <Button onClick={() => setSemesterId(item?.key)}> update </Button>
           </Dropdown>
         );
       },

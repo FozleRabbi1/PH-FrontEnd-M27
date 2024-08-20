@@ -54,12 +54,6 @@ const SemesterRegistration = () => {
   return (
     <div>
       <h2>create semester registration </h2>
-      <p>academicSemester</p>
-      <p>status</p>
-      <p>startDate</p>
-      <p>endDate</p>
-      <p>minCredit</p>
-      <p>maxCredit</p>
 
       <Flex justify="center" align="center">
         <Col span={8}>

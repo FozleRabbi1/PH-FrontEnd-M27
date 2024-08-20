@@ -41,5 +41,28 @@ export const courseManegemnetApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["semester"],
     }),
+
+    getAllCourses: builder.query({
+      query: (query) => {
+        const params = new URLSearchParams();
+        if (query) {
+          query.forEach((item: TQueryParam) => {
+            params.append(item?.name, item?.value as string); //note: P.apperd এর মধ্যে string e দিতে হবে
+          });
+        }
+        return {
+          url: "/courses",
+          method: "GET",
+          params,
+        };
+      },
+      providesTags: ["semester"],
+      transformResponse: (response: TResponseRedux<any>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
   }),
 });

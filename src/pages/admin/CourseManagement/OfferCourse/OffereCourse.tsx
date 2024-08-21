@@ -14,15 +14,13 @@ const OfferCourse = () => {
   const [courseId, setCourseId] = useState("");
   // const [addOfferedCourse] = useCreateOfferedCourseMutation();
 
-  // const { data: semesterRegistrationData } =
-  //   courseManegemnetApi.useGetAllRegisteredSemesterQuery([
-  //     { name: "sort", value: "year" },
-  //     { name: "status", value: "UPCOMING" },
-  //   ]);
   const { data: semesterRegistrationData } =
-    courseManegemnetApi.useGetAllRegisteredSemesterQuery(undefined);
-
-  console.log(semesterRegistrationData);
+    courseManegemnetApi.useGetAllRegisteredSemesterQuery([
+      { name: "sort", value: "year" },
+      { name: "status", value: "UPCOMMING" },
+    ]);
+  // const { data: semesterRegistrationData } =
+  //   courseManegemnetApi.useGetAllRegisteredSemesterQuery(undefined);
 
   const { data: academicFacultyData } =
     academicManagmentApi.useGetAcademicFacultiesQuery(undefined);
@@ -35,9 +33,9 @@ const OfferCourse = () => {
 
   const { data: facultiesData, isFetching: fetchingFaculties } =
     courseManegemnetApi.useGetCourseFacultiesQuery(courseId, {
-      skip: !courseId,
+      skip: !courseId, //==== id না আশা পর্যন্ত এই query id কে skip করবে data fetch করবে না 
     });
-  console.log(facultiesData);
+
   const semesterRegistrationOptions = semesterRegistrationData?.data?.map(
     (item) => ({
       value: item._id,
@@ -61,7 +59,6 @@ const OfferCourse = () => {
     value: item._id,
     label: item.title,
   }));
-
   const facultiesOptions = facultiesData?.data?.faculties?.map((item) => ({
     value: item._id,
     label: `${item.name.firstName} ${item.name.middleName} ${item.name.lastName}`,

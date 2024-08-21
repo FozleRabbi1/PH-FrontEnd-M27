@@ -1,5 +1,9 @@
 import { TQueryParam, TResponseRedux } from "../../../types";
-import { TAcedemicSemester } from "../../../types/academicManagment.types";
+import {
+  TAcademicDepartment,
+  TAcademicFaculty,
+  TAcedemicSemester,
+} from "../../../types/academicManagment.types";
 import { baseApi } from "../../api/baseApi";
 
 export const academicManagmentApi = baseApi.injectEndpoints({
@@ -25,12 +29,34 @@ export const academicManagmentApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getAcademicDepartments: builder.query({
+      query: () => {
+        return { url: "/academic-departments", method: "GET" };
+      },
+      transformResponse: (response: TResponseRedux<TAcademicDepartment[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
     addAcademicSemester: builder.mutation({
       query: (data) => ({
         url: "/academic-semister/create-academic-semester",
         method: "POST",
         body: data,
       }),
+    }),
+    getAcademicFaculties: builder.query({
+      query: () => {
+        return { url: "/academic-faculties", method: "GET" };
+      },
+      transformResponse: (response: TResponseRedux<TAcademicFaculty[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
     }),
   }),
 });

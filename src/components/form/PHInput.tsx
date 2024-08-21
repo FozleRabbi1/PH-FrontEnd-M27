@@ -4,10 +4,11 @@ import { Controller } from "react-hook-form";
 type TInputProps = {
   type: string;
   name: string;
-  label: string;
+  label?: string;
+  disabled?: boolean;
 };
 
-const PHInput = ({ type, name, label }: TInputProps) => {
+const PHInput = ({ type, name, label, disabled }: TInputProps) => {
   return (
     <div>
       {/* {label ? label : null}   <Form.Item এর মধ্যে label={label} use করার জন্য এখানে আর label লাগবে না  */}
@@ -15,7 +16,13 @@ const PHInput = ({ type, name, label }: TInputProps) => {
         name={name} //{...register(name)} এটি উঠে যাবে কারন <Controller  name={name} এর সাহায্যে register করে ফেলছে ( v:2.18 )
         render={({ field }) => (
           <Form.Item label={label}>
-            <Input {...field} type={type} id={name} size="large" />
+            <Input
+              {...field}
+              type={type}
+              id={name}
+              size="large"
+              disabled={disabled}
+            />
           </Form.Item>
         )}
       />

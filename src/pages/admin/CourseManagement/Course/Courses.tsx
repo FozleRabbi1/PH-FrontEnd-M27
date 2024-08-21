@@ -36,7 +36,7 @@ const Courses = () => {
       title: "Action",
       key: "X",
       render: (item) => {
-        return <AddFacultyModal datas={item} />;
+        return <AddFacultyModal facultyInfo={item} />;
       },
     },
   ];
@@ -52,10 +52,11 @@ const Courses = () => {
   );
 };
 
-const AddFacultyModal = ({ data }) => {
+const AddFacultyModal = ({ facultyInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { data: facultyData } =
     userManagementApi.useGetAllFacultyDataQuery(undefined);
+  const [addFaculties] = courseManegemnetApi.useAddFacultiesMutation();
 
   const facultiesOptions = facultyData?.data?.map((item) => ({
     value: item._id,
@@ -63,15 +64,17 @@ const AddFacultyModal = ({ data }) => {
   }));
 
   const handleSubmit = (data) => {
-    console.log(data);
+    const facultyData = {
+      courseId: facultyInfo.key,
+      data,
+    };
+    addFaculties(facultyData);
   };
 
   const showModal = () => {
     setIsModalOpen(true);
   };
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -84,8 +87,8 @@ const AddFacultyModal = ({ data }) => {
       <Modal
         title="Basic Modal"
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
+        footer={null}
       >
         <PHForm onSubmit={handleSubmit}>
           <PHSelect

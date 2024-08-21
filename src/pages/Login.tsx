@@ -18,8 +18,8 @@ const Login = () => {
   const [login] = authApi.useLoginMutation();
 
   const defaultValue = {
-    id: "A-0001",
-    password: "admin123",
+    id: "2024030001",
+    password: "student123",
   };
 
   const onSubmit = async (data: FieldValues) => {

@@ -33,6 +33,15 @@ export const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    changePassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/auth/change-password",
+          method: "POST",
+          body: data,
+        };
+      },
+    }),
     getAllFacultyData: builder.query({
       query: (query) => {
         const params = new URLSearchParams();

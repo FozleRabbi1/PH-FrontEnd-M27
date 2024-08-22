@@ -5,6 +5,7 @@ import { baseApi } from "../../api/baseApi";
 export const studentCourse = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAllOfferedCourses: builder.query({
+      providesTags: ["offeredCourse"],
       query: (query) => {
         const params = new URLSearchParams();
         if (query) {
@@ -26,14 +27,15 @@ export const studentCourse = baseApi.injectEndpoints({
       },
     }),
 
-    // changePassword: builder.mutation({
-    //   query: (data) => {
-    //     return {
-    //       url: "/auth/change-password",
-    //       method: "POST",
-    //       body: data,
-    //     };
-    //   },
-    // }),
+    enrollCourse: builder.mutation({
+      query: (data) => {
+        return {
+          url: "/enrolled-courses/create-enrolled-course",
+          method: "POST",
+          body: data,
+        };
+      },
+      invalidatesTags: ["offeredCourse"],
+    }),
   }),
 });

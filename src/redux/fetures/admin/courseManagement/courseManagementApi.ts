@@ -114,7 +114,7 @@ export const courseManegemnetApi = baseApi.injectEndpoints({
     }),
     addRegisteredSemester: builder.mutation({
       query: (data) => ({
-        url: "/semester-registrations/create-semester-registration",
+        url: "/semester-registation/create-semester-registation",
         method: "POST",
         body: data,
       }),

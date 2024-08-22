@@ -17,11 +17,6 @@ const Login = () => {
   // const { register } = useFormContext();
   const [login] = authApi.useLoginMutation();
 
-  const defaultValue = {
-    id: "2024030001",
-    password: "student123",
-  };
-
   const onSubmit = async (data: FieldValues) => {
     console.log(data);
     const tostId = toast.loading("Logging in");
@@ -55,7 +50,7 @@ const Login = () => {
 
   return (
     <Row justify="center" align="middle" style={{ height: "100vh" }}>
-      <PHForm onSubmit={onSubmit} defaultValues={defaultValue}>
+      <PHForm onSubmit={onSubmit}>
         <PHInput type="text" name="id" label="ID"></PHInput>
         <PHInput type="text" name="password" label="Password"></PHInput>
         <Button htmlType="submit">Login</Button>

@@ -45,14 +45,16 @@ const RegistardSemester = () => {
     })
   );
 
-  const handleStatusUpdate = (data) => {
+  const handleStatusUpdate = async (data) => {
     const updateData = {
       id: semesterId,
       data: {
         status: data.key,
       },
     };
-    updateRegisteredSemester(updateData);
+    console.log(updateData);
+    const res = await updateRegisteredSemester(updateData);
+    console.log(res);
   };
 
   const menuProps = {

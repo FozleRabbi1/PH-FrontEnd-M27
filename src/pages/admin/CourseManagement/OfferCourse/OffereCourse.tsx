@@ -9,10 +9,12 @@ import PHSlectWithWatch from "../../../../components/form/PHSelectWithWatch";
 import PHInput from "../../../../components/form/PHInput";
 import { weekDaysOptions } from "../../../../constants/global";
 import PHTimePicker from "../../../../components/form/PHTimePicker";
+import moment from "moment";
 
 const OfferCourse = () => {
   const [courseId, setCourseId] = useState("");
-  // const [addOfferedCourse] = useCreateOfferedCourseMutation();
+  const [addOfferedCourse] =
+    courseManegemnetApi.useCreateOfferedCourseMutation();
 
   const { data: semesterRegistrationData } =
     courseManegemnetApi.useGetAllRegisteredSemesterQuery([
@@ -33,7 +35,7 @@ const OfferCourse = () => {
 
   const { data: facultiesData, isFetching: fetchingFaculties } =
     courseManegemnetApi.useGetCourseFacultiesQuery(courseId, {
-      skip: !courseId, //==== id না আশা পর্যন্ত এই query id কে skip করবে data fetch করবে না 
+      skip: !courseId, //==== id না আশা পর্যন্ত এই query id কে skip করবে data fetch করবে না
     });
 
   const semesterRegistrationOptions = semesterRegistrationData?.data?.map(
@@ -65,7 +67,16 @@ const OfferCourse = () => {
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
+    const offeredCourseData = {
+      ...data,
+      maxCapacity: Number(data.maxCapacity),
+      section: Number(data.section),
+      startTime: moment(new Date(data.startTime)).format("HH:mm"),
+      endTime: moment(new Date(data.endTime)).format("HH:mm"),
+    };
+
+    const res = await addOfferedCourse(offeredCourseData);
+    console.log(res);
   };
 
   return (

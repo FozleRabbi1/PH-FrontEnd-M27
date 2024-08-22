@@ -112,22 +112,22 @@ export const courseManegemnetApi = baseApi.injectEndpoints({
         };
       },
     }),
-    // addRegisteredSemester: builder.mutation({
-    //   query: (data) => ({
-    //     url: "/semester-registrations/create-semester-registration",
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    //   invalidatesTags: ["semester"],
-    // }),
-    // updateRegisteredSemester: builder.mutation({
-    //   query: (args) => ({
-    //     url: `/semester-registrations/${args.id}`,
-    //     method: "PATCH",
-    //     body: args.data,
-    //   }),
-    //   invalidatesTags: ["semester"],
-    // }),
+    addRegisteredSemester: builder.mutation({
+      query: (data) => ({
+        url: "/semester-registrations/create-semester-registration",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["semester"],
+    }),
+    updateRegisteredSemester: builder.mutation({
+      query: (args) => ({
+        url: `/semester-registation/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["semester"],
+    }),
     getAllCourses: builder.query({
       query: (args) => {
         const params = new URLSearchParams();
@@ -182,13 +182,13 @@ export const courseManegemnetApi = baseApi.injectEndpoints({
         };
       },
     }),
-    // createOfferedCourse: builder.mutation({
-    //   query: (data) => ({
-    //     url: `offered-courses/create-offered-course`,
-    //     method: "POST",
-    //     body: data,
-    //   }),
-    //   invalidatesTags: ["courses"],
-    // }),
+    createOfferedCourse: builder.mutation({
+      query: (data) => ({
+        url: `/offered-course/create-offered-course`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["courses"],
+    }),
   }),
 });
